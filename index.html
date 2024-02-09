@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <title>Salsa Clicker</title>
+</head>
+
+<body>
+    <p>Score: <span id="score">0</span></p>
+    <img src="img/salsa.png" height="256px" width="256px" onclick="addToScore(1)">
+    
+    <button onclick="buyCursor()">Cursor [<span id="cursorcost">15</span>] -- <span id="cursors">0</span></button>
+
+    <script>
+        var score = 0;
+        
+        var cursorCost = 15;
+        var cursors = 0;
+
+        function buyCursor() {
+            if (score >= cursorCost) {
+                score = score - cursorCost;
+                cursors = cursors + 1;
+                cursorCost = Math.round(cursorCost * 1.15);
+                
+                document.getElementById("score").innerHTML = score;
+                document.getElementById("cursorcost").innerHTML = cursorCost;
+                document.getElementById("cursors").innerHTML = cursors;
+            }
+        }
+
+        function addToScore(amount) {
+            score = score + amount;
+            document.getElementById("score").innerHTML = score;
+        }
+        
+        setInterval(function() {
+             score = score + cursors * 1;
+             document.getElementById("score").innerHTML = score;
+        }, 1000)
+    </script>
+</body>
